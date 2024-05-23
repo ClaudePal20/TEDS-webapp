@@ -1,0 +1,29 @@
+/* Sidebar.css */
+.sidebar {
+  display: relative;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar li a:hover {
+  text-decoration: underline;
+}

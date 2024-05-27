@@ -11,12 +11,8 @@ function TransactionForm({ onTransactionSubmit }) {
 
 
   function generateRandomHash() {
-    // Generamos una cadena aleatoria
     const randomString = Math.random().toString(36).substring(2);
-    
-    // Calculamos el hash SHA-256 de la cadena aleatoria
     const hash = SHA256(randomString).toString();
-    
     return hash;
   }
   

@@ -1,12 +1,24 @@
 /* Dashboard.css */
-.main-content {
-    display: flex;
-    flex-direction: column; /* Alinea los elementos verticalmente */
-    padding: 20px;
-    height: 100%; /* Ocupa toda la altura disponible */
-  }
-  
+.dashboard{
+  display: flex;
+  flex-direction: row;
+}
 
+.main-content {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+    
+}
+
+.main-content > * {
+  margin-bottom: 20px;
+
+}
+  
+  
 .content-container {
+  height: 100vh;
   margin-left: 20px;
 }

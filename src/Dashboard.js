@@ -15,8 +15,8 @@ function Dashboard() {
   return (
     <div className='dashboard'>
       <Sidebar />
-      <h1>Dashboard</h1>
       <div className='main-content'>
+        <h1>Dashboard</h1>
         <TransactionForm onTransactionSubmit={addTransaction} />
         <TransactionList transactions={transactions} />
       </div>

@@ -1,4 +1,12 @@
 .dashboard {
   display: flex;
+
+
+}
+.app{
   height: 100vh;
+  display: flex;
+  background-image: linear-gradient(rgba(0, 0, 255, 0.219), rgba(233, 233, 209, 0.219)),url('./assets/pattern.png');
+  background-repeat: repeat;
+  background-size: 150px;
 }

@@ -9,10 +9,12 @@
   
   .card {
     flex: 0 0 auto;
-    width: 300px;
+    text-size-adjust: 100%;
     margin-right: 20px;
     scroll-snap-align: start;
+    overflow: auto; /* Add scrollbars when content overflows */
   }
+  
   
   .slider-controls {
     position: absolute;

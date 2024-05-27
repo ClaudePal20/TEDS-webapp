@@ -1,24 +1,29 @@
 /* Dashboard.css */
-.dashboard{
+
+.dashboard {
   display: flex;
-  flex-direction: row;
 }
 
 .main-content {
-  text-align: left;
+  padding: 20px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-    
 }
 
 .main-content > * {
-  margin-bottom: 20px;
-
+  margin-top: 20px;
 }
-  
-  
-.content-container {
-  height: 100vh;
-  margin-left: 20px;
+
+.transaction-form {
+  background: #ffffff; 
+  padding: 20px;
+  border-radius: 8px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  width: 300px;
+}
+
+.transaction-list {
+  width: 700px; 
+  max-height: 350px;
 }

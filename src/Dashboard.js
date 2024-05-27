@@ -17,8 +17,12 @@ function Dashboard() {
       <Sidebar />
       <div className='main-content'>
         <h1>Dashboard</h1>
-        <TransactionForm onTransactionSubmit={addTransaction} />
-        <TransactionList transactions={transactions} />
+        <div className='transaction-form'>
+          <TransactionForm onTransactionSubmit={addTransaction} />
+        </div>
+        <div className='transaction-list'>
+          <TransactionList transactions={transactions} />
+        </div>
       </div>
     </div>
   );

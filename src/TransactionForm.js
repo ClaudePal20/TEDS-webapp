@@ -1,46 +1,47 @@
-// TransactionForm.js
 import React, { useState } from 'react';
 import { SHA256 } from 'crypto-js';
 import './TransactionForm.css';
+import { addBlock, isBlockchainValid } from './Blockchain';
 
-function TransactionForm({ onTransactionSubmit }) {
-  const [address, setAddress] = useState('');
+function TransactionForm({ onTransactionSubmit, blockchain, setBlockchain }) {
+  const [wallet, setwallet] = useState('');
   const [amount, setAmount] = useState('');
-  const [cryptoCoin, setCrypto] = useState(''); // Add state for cryptocurrency selection
-  const [hash, setHash] = useState('');
-
+  const [cryptoCoin, setCrypto] = useState('');
 
   function generateRandomHash() {
     const randomString = Math.random().toString(36).substring(2);
     const hash = SHA256(randomString).toString();
     return hash;
   }
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const transaction = {
-      address: address,
+      wallet: wallet,
       amount: amount,
-      cryptoCoin: cryptoCoin, 
-      hash: generateRandomHash()
+      cryptoCoin: cryptoCoin
     };
     onTransactionSubmit(transaction);
+
+    // Add transaction to the blockchain
+    const updatedBlockchain = addBlock(blockchain, transaction);
+    setBlockchain(updatedBlockchain);
+
     //Reset values after submission
-    setAddress('');
+    setwallet('');
     setAmount('');
     setCrypto('');
-    setHash('');
   };
 
   return (
     <form onSubmit={handleSubmit} className='transaction-form'>
       <div className='form-group'>
-        <label htmlFor='address'>Recipient Address:</label>
+        <label htmlFor='wallet'>Recipient wallet:</label>
         <input
           type='text'
-          id='address'
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          id='wallet'
+          value={wallet}
+          onChange={(e) => setwallet(e.target.value)}
           required
         />
       </div>

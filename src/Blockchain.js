@@ -1,5 +1,5 @@
-// Blockchain.js
 import React, { useState } from 'react';
+import { SHA256 } from 'crypto-js';
 import './Blockchain.css';
 
 export const customHash = (str) => {
@@ -35,14 +35,18 @@ export const createGenesisBlock = () => {
 };
 
 export const addBlock = (blockchain, data) => {
-  const lastBlock = blockchain[blockchain.length - 1];
-  const newBlock = createBlock(
-    lastBlock.index + 1,
-    new Date().toISOString(),
-    data,
-    lastBlock.hash
-  );
-  return [...blockchain, newBlock];
+  if (blockchain.length === 0) {
+    return [createGenesisBlock()];
+  } else {
+    const lastBlock = blockchain[blockchain.length - 1];
+    const newBlock = createBlock(
+      lastBlock.index + 1,
+      new Date().toISOString(),
+      data,
+      lastBlock.hash
+    );
+    return [...blockchain, newBlock];
+  }
 };
 
 export const isBlockchainValid = (blockchain) => {
@@ -61,26 +65,38 @@ export const isBlockchainValid = (blockchain) => {
   return true;
 };
 
-const Blockchain = () => {
-  const [blockchain, setBlockchain] = useState([createGenesisBlock()]);
+const Blockchain = ({ blockchain, setBlockchain }) => {
   const [newData, setNewData] = useState('');
-  const [isValid, setIsValid] = useState(true);
 
   const handleAddBlock = () => {
-    const updatedBlockchain = addBlock(blockchain, { data: newData });
-    setBlockchain(updatedBlockchain);
-    setIsValid(isBlockchainValid(updatedBlockchain));
+    if (blockchain.length === 0) {
+      const genesisBlock = createGenesisBlock();
+      setBlockchain([genesisBlock]);
+    } else {
+      const lastBlock = blockchain[blockchain.length - 1];
+      const newBlock = createBlock(
+        lastBlock.index + 1,
+        new Date().toISOString(),
+        newData,
+        lastBlock.hash
+      );
+      setBlockchain([...blockchain, newBlock]);
+    }
+
     setNewData('');
+  };
+
+  const handleChange = (event) => {
+    setNewData(event.target.value);
   };
 
   return (
     <div className="blockchain-container">
-      <h1>Simple Blockchain</h1>
       <div>
         <input
           type="text"
           value={newData}
-          onChange={(e) => setNewData(e.target.value)}
+          onChange={handleChange}
           placeholder="Enter data for new block"
         />
         <button onClick={handleAddBlock}>Add Block</button>
@@ -90,8 +106,8 @@ const Blockchain = () => {
         <pre>{JSON.stringify(blockchain, null, 2)}</pre>
       </div>
       <div>
-        <h3 className={isValid ? '' : 'invalid'}>
-          Blockchain Status: {isValid ? 'Valid' : 'Invalid'}
+        <h3 className={isBlockchainValid(blockchain) ? '' : 'invalid'}>
+          Blockchain Status: {isBlockchainValid(blockchain) ? 'Valid' : 'Invalid'}
         </h3>
       </div>
     </div>

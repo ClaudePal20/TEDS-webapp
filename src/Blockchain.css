@@ -1,39 +1,40 @@
-/* BlockchainComponent.css */
 .blockchain-container {
-  max-width: 800px;
+  background-size: cover;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
+  padding: 10px;
+  border: 0.5px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
-.blockchain-container h1 {
-  text-align: center;
+.blockchain-container input{
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-size: 8px;
 }
 
-.blockchain-container input {
+.blocks {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  width: 900px;
+}
+
+.hash-text{
+  word-break: break-all;
+}
+.block-card {
+  background-color: #000;
+  color: #fff;
   padding: 10px;
-  font-size: 1em;
-  margin-right: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 10px;
 }
 
-.blockchain-container button {
-  padding: 10px 20px;
-  font-size: 1em;
-}
-
-.blockchain-container pre {
-  text-align: left;
-  background-color: #eee;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.blockchain-container h3 {
-  color: green;
-}
-
-.blockchain-container h3.invalid {
+.invalid {
   color: red;
 }

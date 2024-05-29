@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { SHA256 } from 'crypto-js';
 import './Blockchain.css';
+import { SHA256 } from 'crypto-js';
 
 export const customHash = (str) => {
   let hash = 0;
@@ -26,15 +26,15 @@ export const createBlock = (index, timestamp, data, previousHash = '') => {
 
 export const calculateBlockHash = (block) => {
   const { index, timestamp, data, previousHash } = block;
-  const str = `${index}${timestamp}${JSON.stringify(data)}${previousHash}`;
-  return customHash(str);
+  const hashInput = `${index}${timestamp}${JSON.stringify(data)}${previousHash}`;
+  return SHA256(hashInput).toString();
 };
 
 export const createGenesisBlock = () => {
   return createBlock(0, new Date().toISOString(), 'Genesis Block', '0');
 };
 
-export const addBlock = (blockchain, data) => {
+export const addBlock = (blockchain, transaction) => {
   if (blockchain.length === 0) {
     return [createGenesisBlock()];
   } else {
@@ -42,27 +42,14 @@ export const addBlock = (blockchain, data) => {
     const newBlock = createBlock(
       lastBlock.index + 1,
       new Date().toISOString(),
-      data,
+      transaction,
       lastBlock.hash
     );
+    transaction.timestamp = newBlock.timestamp;
+    transaction.hash = newBlock.hash;
+    transaction.prev_hash = newBlock.previousHash;
     return [...blockchain, newBlock];
   }
-};
-
-export const isBlockchainValid = (blockchain) => {
-  for (let i = 1; i < blockchain.length; i++) {
-    const currentBlock = blockchain[i];
-    const previousBlock = blockchain[i - 1];
-
-    if (currentBlock.hash !== calculateBlockHash(currentBlock)) {
-      return false;
-    }
-
-    if (currentBlock.previousHash !== previousBlock.hash) {
-      return false;
-    }
-  }
-  return true;
 };
 
 const Blockchain = ({ blockchain, setBlockchain }) => {
@@ -79,20 +66,30 @@ const Blockchain = ({ blockchain, setBlockchain }) => {
           type="text"
           value={newData}
           onChange={handleChange}
-          placeholder="Enter data for new block"
+          placeholder="Buscar transacción"
         />
       </div>
       <div>
         <h2>Blockchain</h2>
-        <pre>{JSON.stringify(blockchain, null, 2)}</pre>
+        <div className="blocks">
+          {blockchain.map((block, index) => (
+            <div key={index} className="block-card">
+              <p><strong>Index:</strong> {block.index}</p>
+              <p><strong>Timestamp:</strong> {block.timestamp}</p>
+              <p><strong>Data:</strong> {JSON.stringify(block.data)}</p>
+              <div className="hash-text">
+                <p><strong>Previous Hash:</strong> {block.previousHash}</p>
+              </div>
+              <p><strong>Hash:</strong> {block.hash}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div>
-        <h3 className={isBlockchainValid(blockchain) ? '' : 'invalid'}>
-          Blockchain Status: {isBlockchainValid(blockchain) ? 'Valid' : 'Invalid'}
-        </h3>
       </div>
     </div>
   );
 };
+
 
 export default Blockchain;

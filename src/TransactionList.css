@@ -1,18 +1,32 @@
-/* TransactionList.css */
-
 .transaction-list {
-  max-height: 400px;
   overflow-y: auto;
+  width: 1200px;
 }
 
 .card-container {
   display: grid;
   gap: 20px;
+  width: 1200px;
+}
+
+.card-items{
+  display: flex;
+  flex-direction: row;
 }
 
 .card {
-  background-color: #fff;
+  width: 300px;
+  padding: 5px;
+}
+
+.card-left-square {
+  background-color: #ffffff;
+  padding: 10px;
+  padding-top: 0;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  font-size: 15px;
+}
+
+.card-right-square >*{
+  padding-left: 20px;
 }

@@ -9,9 +9,9 @@ const CardSlider = ({ cards }) => {
     <div className="card-slider">
       <div className="card-container" ref={sliderRef}>
         {cards.map((card, index) => (
-          <div className="card" key={index}>
-            {card}
-          </div>
+            <div className="card" key={index}>
+              {card}
+            </div>
         ))}
       </div>
     </div>

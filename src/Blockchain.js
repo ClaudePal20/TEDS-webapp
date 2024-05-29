@@ -68,29 +68,6 @@ export const isBlockchainValid = (blockchain) => {
 const Blockchain = ({ blockchain, setBlockchain }) => {
   const [newData, setNewData] = useState('');
 
-  const handleAddBlock = () => {
-    if (blockchain.length === 0) {
-      const genesisBlock = {    
-        "data": {
-        "wallet": "wallet",
-        "amount": "2",
-        "cryptoCoin": "BTC"
-      }}
-      setBlockchain([genesisBlock]);
-    } else {
-      const lastBlock = blockchain[blockchain.length - 1];
-      const newBlock = createBlock(
-        lastBlock.index + 1,
-        new Date().toISOString(),
-        newData,
-        lastBlock.hash
-      );
-      setBlockchain([...blockchain, newBlock]);
-    }
-
-    setNewData('');
-  };
-
   const handleChange = (event) => {
     setNewData(event.target.value);
   };
@@ -104,7 +81,6 @@ const Blockchain = ({ blockchain, setBlockchain }) => {
           onChange={handleChange}
           placeholder="Enter data for new block"
         />
-        <button onClick={handleAddBlock}>Add Block</button>
       </div>
       <div>
         <h2>Blockchain</h2>

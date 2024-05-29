@@ -70,7 +70,12 @@ const Blockchain = ({ blockchain, setBlockchain }) => {
 
   const handleAddBlock = () => {
     if (blockchain.length === 0) {
-      const genesisBlock = createGenesisBlock();
+      const genesisBlock = {    
+        "data": {
+        "wallet": "wallet",
+        "amount": "2",
+        "cryptoCoin": "BTC"
+      }}
       setBlockchain([genesisBlock]);
     } else {
       const lastBlock = blockchain[blockchain.length - 1];

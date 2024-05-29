@@ -36,7 +36,7 @@ function TransactionForm({ onTransactionSubmit, blockchain, setBlockchain }) {
   return (
     <form onSubmit={handleSubmit} className='transaction-form'>
       <div className='form-group'>
-        <label htmlFor='wallet'>Recipient wallet:</label>
+        <label htmlFor='wallet'>Cartera del receptor:</label>
         <input
           type='text'
           id='wallet'
@@ -46,7 +46,7 @@ function TransactionForm({ onTransactionSubmit, blockchain, setBlockchain }) {
         />
       </div>
       <div className='form-group'>
-        <label htmlFor='amount'>Amount to Send:</label>
+        <label htmlFor='amount'>Monto a enviar:</label>
         <input
           type='number'
           id='amount'
@@ -56,20 +56,19 @@ function TransactionForm({ onTransactionSubmit, blockchain, setBlockchain }) {
         />
       </div>
       <div className='form-group'>
-        <label htmlFor='crypto'>Select Cryptocurrency:</label>
         <select
           id='crypto'
           value={cryptoCoin}
           onChange={(e) => setCrypto(e.target.value)}
           required
         >
-          <option value=''>Select Cryptocurrency</option>
+          <option value=''>Elegir criptomoneda</option>
           <option value='BTC'>Bitcoin</option>
           <option value='ETH'>Ethereum</option>
           <option value='XRP'>Ripple</option>
         </select>
       </div>
-      <button type='submit'>Send Transaction</button>
+      <button type='submit'>Enviar transacción</button>
     </form>
   );
 }

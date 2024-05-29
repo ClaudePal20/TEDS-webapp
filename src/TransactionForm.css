@@ -10,6 +10,14 @@
   width: 50%;
 }
 
+button{
+  font-size: 20px;
+}
+
+#crypto{
+  font-size: 20px;
+}
+
 .form-group {
   margin-bottom: 20px; 
 }

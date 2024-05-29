@@ -23,7 +23,7 @@ function Dashboard() {
     <div className='dashboard'>
       <Sidebar />
       <div className='main-content'>
-        <h1>Dashboard</h1>
+        <h1>Transacciones</h1>
         <div className='transaction-form'>
           <TransactionForm
             onTransactionSubmit={addTransaction}
